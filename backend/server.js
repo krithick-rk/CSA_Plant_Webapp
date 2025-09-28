@@ -1,14 +1,9 @@
-// server.js
-const express = require('express');
-const cors = require('cors');
+import express from "express";
+import identifyRoute from "./routes/identify.js";
 
 const app = express();
-app.use(cors());
+app.use(express.json({ limit: "10mb" })); // handle base64 images
 
-app.get('/', (req, res) => {
-  res.send('Backend is alive!');
-});
+app.use("/identify", identifyRoute);
 
-app.listen(5000, () => {
-  console.log("✅ Server running on http://localhost:5000");
-});
+app.listen(5000, () => console.log("Server running on port 5000"));
